@@ -1,12 +1,15 @@
-class LoginPage {
+const BasePage = require("./base.page");
+
+class LoginPage extends BasePage {
+  constructor() {
+    super();
+  }
   async open() {
     await browser.url("/");
   }
-
   get username() {
     return $("#user-name");
   }
-
   get password() {
     return $("#password");
   }
@@ -14,38 +17,26 @@ class LoginPage {
     return $("#login-button");
   }
   get errorMessage() {
-    return $('.error-message-container h3[data-test="error"]');
+    return $('h3[data-test="error"]');
   }
   get title() {
     return $("div.app_logo");
   }
+
   async fillUserName(username) {
-    await this.username.setValue(username);
+    await this.setValue(this.username, username);
   }
   async fillPassword(password) {
-    await this.password.setValue(password);
+    await this.setValue(this.password, password);
   }
-
   async clearUserName() {
-    await this.username.click();
-    await this.username.setValue("");
+    await this.clearValue(this.username);
   }
-
   async clearPassword() {
-    await this.password.click();
-    await this.password.setValue("");
+    await this.clearValue(this.password);
   }
-
   async submitLogin() {
-    await this.submitBtn.click();
-  }
-
-  async getUserNameValue() {
-    return await this.username.getValue();
-  }
-
-  async getPasswordValue() {
-    return await this.password.getValue();
+    await this.clickElement(this.submitBtn);
   }
 }
 

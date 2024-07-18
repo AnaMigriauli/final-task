@@ -49,7 +49,7 @@ exports.config = {
   //
   capabilities: [
     {
-      maxInstances: 2,
+      maxInstances: 3,
       browserName: "chrome",
       acceptInsecureCerts: true,
       "goog:chromeOptions": {
@@ -64,7 +64,7 @@ exports.config = {
       },
     },
     {
-      maxInstances: 2,
+      maxInstances: 3,
       browserName: "MicrosoftEdge",
       acceptInsecureCerts: true,
       "ms:edgeOptions": {
@@ -156,7 +156,7 @@ exports.config = {
   // See the full list at http://mochajs.org/
   mochaOpts: {
     ui: "bdd",
-    timeout: 120000 ,
+    timeout: 180000,
   },
 
   //
@@ -229,8 +229,9 @@ exports.config = {
   /**
    * Function to be executed before a test (in Mocha/Jasmine) starts.
    */
-  // beforeTest: function (test, context) {
-  // },
+  beforeTest: async function (test, context) {
+    await browser.maximizeWindow();
+  },
   /**
    * Hook that gets executed _before_ a hook within the suite starts (e.g. runs before calling
    * beforeEach in Mocha)
